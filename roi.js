@@ -47,13 +47,13 @@ function updateTotals() {
         const timePerPerson = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
         const hourlyRate = parseFloat(row.querySelector('td:nth-child(5) input').value) || 0;
         const numberOfPeople = parseFloat(row.querySelector('td:nth-child(6) input').value) || 0;
+        const timeSavingsPercent = parseFloat(row.querySelector('td:nth-child(9) input').value) || 0;
         
-        const roi = calculateRowROI(timePerPerson, hourlyRate, numberOfPeople, 50); // 50% besparing
+        const roi = calculateRowROI(timePerPerson, hourlyRate, numberOfPeople, timeSavingsPercent);
         
         // Uppdatera beräknade värden i raden
         row.querySelector('td:nth-child(7)').textContent = formatCurrency(roi.totalCost);
         row.querySelector('td:nth-child(8)').textContent = roi.totalTime;
-        row.querySelector('td:nth-child(9)').textContent = '50%';
         row.querySelector('td:nth-child(10)').textContent = roi.timeSaved;
         row.querySelector('td:nth-child(11)').textContent = formatCurrency(roi.moneySaved);
         
