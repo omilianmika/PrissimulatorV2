@@ -2,8 +2,9 @@
 const systemCost = parseFloat(localStorage.getItem('totalSystemCost')) || 0;
 document.getElementById('systemCost').textContent = systemCost.toLocaleString('sv-SE');
 
-// Initiera ROI-diagram
+// Initiera diagram
 let roiChart;
+let functionChart;
 
 // Funktion för att formatera valuta
 function formatCurrency(value) {
@@ -25,12 +26,21 @@ function calculateRowROI(timePerPerson, hourlyRate, numberOfPeople, timeSavingsP
     };
 }
 
-// Funktion för att uppdatera totaler
+// Funktion för att uppdatera totaler och diagram
 function updateTotals() {
     let totalCost = 0;
     let totalTime = 0;
     let totalTimeSaved = 0;
     let totalMoneySaved = 0;
+    
+    // Data för funktionsområdesdiagram
+    const functionData = {
+        labels: [],
+        totalTime: [],
+        timeSaved: [],
+        totalCost: [],
+        moneySaved: []
+    };
 
     // Gå igenom alla rader och summera
     document.querySelectorAll('tbody tr').forEach(row => {
@@ -46,6 +56,14 @@ function updateTotals() {
         row.querySelector('td:nth-child(9)').textContent = '50%';
         row.querySelector('td:nth-child(10)').textContent = roi.timeSaved;
         row.querySelector('td:nth-child(11)').textContent = formatCurrency(roi.moneySaved);
+        
+        // Samla data för funktionsområdesdiagram
+        const functionName = row.querySelector('td:nth-child(3)').textContent;
+        functionData.labels.push(functionName);
+        functionData.totalTime.push(roi.totalTime);
+        functionData.timeSaved.push(roi.timeSaved);
+        functionData.totalCost.push(roi.totalCost);
+        functionData.moneySaved.push(roi.moneySaved);
         
         // Lägg till i totaler
         totalCost += roi.totalCost;
@@ -71,9 +89,10 @@ function updateTotals() {
 
     // Uppdatera diagram
     updateChart(systemCost, totalMoneySaved);
+    updateFunctionChart(functionData);
 }
 
-// Funktion för att uppdatera diagrammet
+// Funktion för att uppdatera ROI-diagrammet
 function updateChart(systemCost, totalSavings) {
     const ctx = document.getElementById('roiChart').getContext('2d');
     
@@ -119,6 +138,57 @@ function updateChart(systemCost, totalSavings) {
                             return context.parsed.y.toLocaleString('sv-SE') + ' kr';
                         }
                     }
+                }
+            }
+        }
+    });
+}
+
+// Funktion för att uppdatera funktionsområdesdiagrammet
+function updateFunctionChart(data) {
+    const ctx = document.getElementById('functionChart').getContext('2d');
+    
+    if (functionChart) {
+        functionChart.destroy();
+    }
+
+    functionChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [
+                {
+                    label: 'Total tid (h)',
+                    data: data.totalTime,
+                    backgroundColor: '#4B5D60',
+                    borderColor: '#4B5D60',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Tidsbesparing (h)',
+                    data: data.timeSaved,
+                    backgroundColor: '#F0B600',
+                    borderColor: '#F0B600',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Timmar'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Tid och Besparing per Funktionsområde'
                 }
             }
         }

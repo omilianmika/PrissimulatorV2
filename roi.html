@@ -8,32 +8,32 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mb-0">ROI-kalkyl</h1>
             <a href="index.html" class="btn btn-outline-primary">Tillbaka till Prissimulator</a>
         </div>
 
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-header">
                 <h5 class="card-title mb-0">Return on Investment (ROI)</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th>Huvudkategori</th>
-                                <th>För vem</th>
-                                <th>Funktionsområde</th>
-                                <th class="editable">Tid per person (h)</th>
-                                <th class="editable">Timkostnad (kr)</th>
-                                <th class="editable">Antal personer / år</th>
-                                <th>Totalkostnad (kr)</th>
-                                <th>Totaltid (h)</th>
-                                <th>Besparing i tid (%)</th>
-                                <th>Tidsbesparing (h)</th>
-                                <th>Kostnadsbesparing (kr)</th>
+                                <th style="min-width: 120px;">Huvudkategori</th>
+                                <th style="min-width: 100px;">För vem</th>
+                                <th style="min-width: 150px;">Funktionsområde</th>
+                                <th style="min-width: 100px;">Tid per person (h)</th>
+                                <th style="min-width: 100px;">Timkostnad (kr)</th>
+                                <th style="min-width: 100px;">Antal personer / år</th>
+                                <th style="min-width: 120px;">Totalkostnad (kr)</th>
+                                <th style="min-width: 100px;">Totaltid (h)</th>
+                                <th style="min-width: 100px;">Besparing i tid (%)</th>
+                                <th style="min-width: 120px;">Tidsbesparing (h)</th>
+                                <th style="min-width: 150px;">Kostnadsbesparing (kr)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +63,6 @@
                                 <td class="calculated">75</td>
                                 <td class="calculated">11 250,00 kr</td>
                             </tr>
-                            <!-- Lägg till fler rader här -->
                         </tbody>
                         <tfoot>
                             <tr class="table-primary">
@@ -79,7 +78,7 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Systemkostnad vs Besparing</h5>
@@ -93,8 +92,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <canvas id="roiChart"></canvas>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Kostnad och Besparing</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="roiChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Tid och Besparing per Funktion</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="functionChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

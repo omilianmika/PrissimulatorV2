@@ -128,7 +128,7 @@ function calculateCosts() {
     const konsultTimmarKostnad = parseInt(konsultTimmarSelect.value);
     
     // Beräkna totalkostnad (inklusive uppstartsavgift och konsulttimmar)
-    const totalKostnadVarde = arskostnad + uppstartsvarde + konsultTimmarKostnad;
+    const totalkostnad = uppstartsvarde + konsultTimmarKostnad + arskostnad;
     
     // Beräkna snittkostnad per användare per månad
     const totalAntal = heltidAntal + deltidAntal + sasongareAntal;
@@ -145,7 +145,7 @@ function calculateCosts() {
     licensKostnadAr.textContent = formatNumber(arskostnad);
     uppstartsavgift.textContent = formatNumber(uppstartsvarde);
     konsultTimmarKostnadDisplay.textContent = formatNumber(konsultTimmarKostnad);
-    totalkostnad.textContent = formatNumber(totalKostnadVarde);
+    totalkostnad.textContent = formatNumber(totalkostnad);
     rabattTotal.textContent = formatNumber(totalRabatt);
     snittkostnadAnvandare.textContent = formatNumber(snittkostnadAnvandareVarde);
     snittkostnadManad.textContent = formatNumber(snittkostnadManadVarde);
@@ -157,6 +157,9 @@ function calculateCosts() {
     // Uppdatera diagram och tabell med månadskostnad
     updateChart(manadskostnad, sasongareKostnadPerManad, antalManader);
     updateMonthlyTable(manadskostnad, sasongareKostnadPerManad);
+
+    // Spara totalkostnad för ROI-kalkylatorn
+    localStorage.setItem('totalSystemCost', totalkostnad);
 }
 
 // Skapa och uppdatera diagram
