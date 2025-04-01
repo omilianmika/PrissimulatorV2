@@ -199,6 +199,7 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
             },
             plugins: {
                 legend: {
+                    display: true,
                     labels: {
                         color: '#000000'
                     }
