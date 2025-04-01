@@ -41,7 +41,6 @@ const antalDeltid = document.getElementById('antalDeltid');
 const antalSasongare = document.getElementById('antalSasongare');
 const sasongManader = document.getElementById('sasongManader');
 const uppstartsTypRadios = document.querySelectorAll('input[name="uppstartsTyp"]');
-const provisionInput = document.getElementById('provision');
 const konsultTimmarSelect = document.getElementById('konsultTimmar');
 
 // Hämta alla output-element
@@ -50,7 +49,6 @@ const licensKostnadAr = document.getElementById('licensKostnadAr');
 const uppstartsavgift = document.getElementById('uppstartsavgift');
 const totalkostnad = document.getElementById('totalkostnad');
 const rabattTotal = document.getElementById('rabattTotal');
-const provisionsBelopp = document.getElementById('provisionsBelopp');
 const konsultTimmarKostnadDisplay = document.getElementById('konsultTimmarKostnad');
 const snittkostnadAnvandare = document.getElementById('snittkostnadAnvandare');
 const snittkostnadManad = document.getElementById('snittkostnadManad');
@@ -95,35 +93,28 @@ function calculateCosts() {
 
     // Beräkna rabatter
     const heltidRabatt = heltidAntal * heltidNiva.rabatt;
-    // Deltidsrabatt är skillnaden mellan heltidspris och deltidspris per person
     const deltidRabatt = deltidAntal * (heltidNiva.heltid - deltidPris);
     const sasongareRabatt = sasongareAntal * heltidNiva.rabatt;
 
-    // Totala månadskostnader
+    // Totala månadskostnader (utan uppstartsavgift och konsulttimmar)
     const manadskostnad = heltidKostnad + deltidKostnad + sasongareKostnadPerManad;
     const arskostnad = (manadskostnad * 12) - (sasongareKostnadPerManad * (12 - antalManader));
     const totalRabatt = ((heltidRabatt + deltidRabatt) * 12) + (sasongareRabatt * antalManader);
     
-    // Hämta vald uppstartsavgift
+    // Hämta vald uppstartsavgift och konsulttimmar
     const selectedUppstart = document.querySelector('input[name="uppstartsTyp"]:checked');
     const uppstartsvarde = parseInt(selectedUppstart.value);
-    
-    // Hämta vald konsulttimmarkostnad
     const konsultTimmarKostnad = parseInt(konsultTimmarSelect.value);
     
-    // Beräkna totalkostnad
+    // Beräkna totalkostnad (inklusive uppstartsavgift och konsulttimmar)
     const totalKostnadVarde = arskostnad + uppstartsvarde + konsultTimmarKostnad;
     
-    // Beräkna provision
-    const provisionsProcent = parseFloat(provisionInput.value || 0);
-    const provisionsVarde = (totalKostnadVarde * provisionsProcent) / 100;
-    
-    // Beräkna snittkostnad per användare
+    // Beräkna snittkostnad per användare (ENDAST baserat på årskostnad, utan uppstartsavgift och konsulttimmar)
     const totalAntal = heltidAntal + deltidAntal + sasongareAntal;
-    const snittkostnadAnvandareVarde = totalAntal > 0 ? totalKostnadVarde / totalAntal : 0;
+    const snittkostnadAnvandareVarde = totalAntal > 0 ? arskostnad / totalAntal : 0;
     
-    // Beräkna snittkostnad per månad
-    const snittkostnadManadVarde = manadskostnad; // Endast licenskostnad per månad
+    // Beräkna snittkostnad per månad (ENDAST licenskostnad)
+    const snittkostnadManadVarde = manadskostnad;
     
     // Beräkna rabatt per månad
     const rabattPerManadVarde = totalRabatt / 12;
@@ -135,7 +126,6 @@ function calculateCosts() {
     konsultTimmarKostnadDisplay.textContent = formatNumber(konsultTimmarKostnad);
     totalkostnad.textContent = formatNumber(totalKostnadVarde);
     rabattTotal.textContent = formatNumber(totalRabatt);
-    provisionsBelopp.textContent = formatNumber(provisionsVarde);
     snittkostnadAnvandare.textContent = formatNumber(snittkostnadAnvandareVarde);
     snittkostnadManad.textContent = formatNumber(snittkostnadManadVarde);
     rabattPerManad.textContent = formatNumber(rabattPerManadVarde);
@@ -143,8 +133,9 @@ function calculateCosts() {
     // Uppdatera priser i labels
     updatePriceLabels();
 
-    // Uppdatera diagram med månadskostnad (exklusive uppstartsavgift)
+    // Uppdatera diagram och tabell med månadskostnad
     updateChart(manadskostnad, sasongareKostnadPerManad, antalManader);
+    updateMonthlyTable(manadskostnad, sasongareKostnadPerManad);
 }
 
 // Skapa och uppdatera diagram
@@ -171,8 +162,8 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
             datasets: [{
                 label: 'Månadskostnad',
                 data: monthlyData,
-                backgroundColor: '#0d6efd',
-                borderColor: '#0d6efd',
+                backgroundColor: '#4B5D60',
+                borderColor: '#4B5D60',
                 borderWidth: 1
             }]
         },
@@ -185,6 +176,29 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
                     title: {
                         display: true,
                         text: 'Kostnad (SEK)'
+                    },
+                    grid: {
+                        color: '#4B5D60',
+                        borderColor: '#4B5D60'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: '#4B5D60',
+                        borderColor: '#4B5D60'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
                     }
                 }
             }
@@ -192,8 +206,28 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
     });
 }
 
+// Uppdatera månadstabell
+function updateMonthlyTable(baseCost, seasonalCost) {
+    const monthlyDataRow = document.getElementById('monthlyDataRow');
+    const cells = monthlyDataRow.getElementsByTagName('td');
+    const activeMonths = document.querySelectorAll('#monthButtons button.active');
+    
+    // Återställ alla celler till baskostnad
+    for (let i = 0; i < cells.length; i++) {
+        let cost = baseCost;
+        // Lägg till säsongskostnad om månaden är aktiv
+        activeMonths.forEach(button => {
+            const monthIndex = parseInt(button.getAttribute('data-month')) - 1;
+            if (monthIndex === i) {
+                cost += seasonalCost;
+            }
+        });
+        cells[i].textContent = formatNumber(cost);
+    }
+}
+
 // Lägg till event listeners
-[antalHeltid, antalDeltid, antalSasongare, sasongManader, provisionInput, konsultTimmarSelect].forEach(input => {
+[antalHeltid, antalDeltid, antalSasongare, sasongManader, konsultTimmarSelect].forEach(input => {
     input.addEventListener('input', calculateCosts);
 });
 
