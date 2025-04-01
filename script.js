@@ -175,30 +175,31 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Kostnad (SEK)'
+                        text: 'Kostnad (SEK)',
+                        color: '#000000'
                     },
                     grid: {
-                        color: '#4B5D60',
+                        color: 'rgba(75, 93, 96, 0.2)',
                         borderColor: '#4B5D60'
                     },
                     ticks: {
-                        color: 'white'
+                        color: '#000000'
                     }
                 },
                 x: {
                     grid: {
-                        color: '#4B5D60',
+                        color: 'rgba(75, 93, 96, 0.2)',
                         borderColor: '#4B5D60'
                     },
                     ticks: {
-                        color: 'white'
+                        color: '#000000'
                     }
                 }
             },
             plugins: {
                 legend: {
                     labels: {
-                        color: 'white'
+                        color: '#000000'
                     }
                 }
             }

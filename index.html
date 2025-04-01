@@ -109,15 +109,6 @@
                         <hr>
                         <p>Totalkostnad: <span id="totalkostnad">0</span> kr</p>
                         <p class="text-danger">Rabatt total: <span id="rabattTotal">0</span> kr</p>
-                        <hr>
-                        <div class="mb-3">
-                            <label for="provision" class="form-label">Provision %</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="provision" value="5" min="0" max="100" step="0.1">
-                                <span class="input-group-text">%</span>
-                            </div>
-                        </div>
-                        <p class="text-success">Provisionsbelopp: <span id="provisionsBelopp">0</span> kr</p>
                     </div>
                 </div>
             </div>
@@ -131,6 +122,28 @@
                     </div>
                     <div class="card-body">
                         <canvas id="monthlyChart"></canvas>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Jan</th>
+                                        <th>Feb</th>
+                                        <th>Mar</th>
+                                        <th>Apr</th>
+                                        <th>Maj</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="monthlyDataRow">
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
