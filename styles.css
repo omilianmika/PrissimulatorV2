@@ -5,32 +5,32 @@
 .card {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 1rem;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
 
 .card-header {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     font-weight: 500;
 }
 
 .form-control, .form-select {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: black;
 }
 
 .form-control:focus, .form-select:focus {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border-color: #F0B600;
     color: black;
     box-shadow: 0 0 0 0.25rem rgba(240, 182, 0, 0.25);
 }
 
 body {
-    background-color: #222A2B;
+    background-color: white;
     color: black;
     padding: 20px 0;
     min-height: 100vh;
@@ -41,16 +41,17 @@ body {
 }
 
 canvas {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border-radius: 4px;
     padding: 10px;
     height: 300px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-outline-primary {
     color: #4B5D60;
     border-color: #4B5D60;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
 }
 
 .btn-outline-primary:hover {
@@ -66,7 +67,7 @@ canvas {
 }
 
 .form-check-input {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border-color: #4B5D60;
 }
 
@@ -76,8 +77,9 @@ canvas {
 }
 
 .table {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .table th {
@@ -91,11 +93,11 @@ canvas {
 
 /* Fix för select dropdown */
 option {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     color: black;
 }
 
-/* Justera text färger för bättre läsbarhet mot vit bakgrund */
+/* Justera text färger för bättre läsbarhet */
 .card-body {
     color: black;
 }
@@ -109,4 +111,13 @@ option {
     margin-left: 10px;
     padding: 2px 10px;
     font-size: 0.9rem;
+    background-color: #F0B600;
+    border-color: #F0B600;
+    color: black;
+}
+
+.btn-reset:hover {
+    background-color: #d9a400;
+    border-color: #d9a400;
+    color: black;
 } 

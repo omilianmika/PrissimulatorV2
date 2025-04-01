@@ -110,9 +110,9 @@ function calculateCosts() {
     // Beräkna totalkostnad (inklusive uppstartsavgift och konsulttimmar)
     const totalKostnadVarde = arskostnad + uppstartsvarde + konsultTimmarKostnad;
     
-    // Beräkna snittkostnad per användare (ENDAST baserat på årskostnad, utan uppstartsavgift och konsulttimmar)
+    // Beräkna snittkostnad per användare per månad
     const totalAntal = heltidAntal + deltidAntal + sasongareAntal;
-    const snittkostnadAnvandareVarde = totalAntal > 0 ? arskostnad / totalAntal : 0;
+    const snittkostnadAnvandareVarde = totalAntal > 0 ? manadskostnad / totalAntal : 0;
     
     // Beräkna snittkostnad per månad (ENDAST licenskostnad)
     const snittkostnadManadVarde = manadskostnad;
