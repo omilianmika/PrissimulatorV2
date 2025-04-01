@@ -58,6 +58,26 @@ const rabattPerManad = document.getElementById('rabattPerManad');
 // Initiera diagram
 let monthlyChart;
 
+// Initiera alla popovers
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
+    html: true,
+    trigger: 'click',
+    placement: 'right'
+}))
+
+// Stäng popover när man klickar utanför
+document.addEventListener('click', function(e) {
+    popoverTriggerList.forEach(popoverTriggerEl => {
+        if (!popoverTriggerEl.contains(e.target)) {
+            const popover = bootstrap.Popover.getInstance(popoverTriggerEl)
+            if (popover) {
+                popover.hide()
+            }
+        }
+    })
+})
+
 // Uppdatera priser i labels
 function updatePriceLabels() {
     const heltidAntal = parseInt(antalHeltid.value || 0);

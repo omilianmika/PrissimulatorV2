@@ -120,4 +120,40 @@ option {
     background-color: #d9a400;
     border-color: #d9a400;
     color: black;
+}
+
+/* Stil för informationsikon */
+.bi-info-circle {
+    color: #4B5D60;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.bi-info-circle:hover {
+    color: #F0B600;
+}
+
+/* Stil för popover */
+.popover {
+    max-width: 500px;
+}
+
+.price-table {
+    margin: -8px;
+}
+
+.price-table .table {
+    margin-bottom: 0;
+    font-size: 0.875rem;
+}
+
+.price-table .table th,
+.price-table .table td {
+    padding: 4px 8px;
+    text-align: right;
+}
+
+.price-table .table th:first-child,
+.price-table .table td:first-child {
+    text-align: left;
 } 
