@@ -42,6 +42,7 @@ const antalSasongare = document.getElementById('antalSasongare');
 const sasongManader = document.getElementById('sasongManader');
 const uppstartsTypRadios = document.querySelectorAll('input[name="uppstartsTyp"]');
 const konsultTimmarSelect = document.getElementById('konsultTimmar');
+const resetButton = document.getElementById('resetButton');
 
 // Hämta alla output-element
 const licensKostnadManad = document.getElementById('licensKostnadManad');
@@ -162,8 +163,8 @@ function updateChart(baseCost, seasonalCost, seasonMonths) {
             datasets: [{
                 label: 'Månadskostnad',
                 data: monthlyData,
-                backgroundColor: '#4B5D60',
-                borderColor: '#4B5D60',
+                backgroundColor: '#F0B600',
+                borderColor: '#F0B600',
                 borderWidth: 1
             }]
         },
@@ -250,6 +251,42 @@ function updateSeasonalMonths() {
     const activeMonths = document.querySelectorAll('#monthButtons button.active').length;
     sasongManader.value = activeMonths;
     calculateCosts();
+}
+
+// Funktion för att nollställa alla värden
+function resetAllValues() {
+    antalHeltid.value = '0';
+    antalDeltid.value = '0';
+    antalSasongare.value = '0';
+    sasongManader.value = '0';
+    
+    // Nollställ uppstartsavgift
+    const noStartupRadio = document.querySelector('input[name="uppstartsTyp"][value="0"]');
+    if (noStartupRadio) {
+        noStartupRadio.checked = true;
+    }
+    
+    // Nollställ konsulttimmar
+    konsultTimmarSelect.value = '0';
+    
+    // Nollställ månadsknapparna
+    const monthButtons = document.querySelectorAll('#monthButtons button.active');
+    monthButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Uppdatera beräkningar
+    calculateCosts();
+}
+
+// Sätt initiala värden till 0
+window.addEventListener('load', () => {
+    resetAllValues();
+});
+
+// Lägg till event listener för nollställningsknappen
+if (resetButton) {
+    resetButton.addEventListener('click', resetAllValues);
 }
 
 // Initiell beräkning

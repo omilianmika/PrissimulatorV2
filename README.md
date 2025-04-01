@@ -13,8 +13,7 @@
 - Dynamisk prisberäkning baserat på antal användare
 - Välj månader för säsongsanställda
 - Beräkna uppstartsavgift och konsulttimmar
-- Se månadsvis kostnadsutveckling
-- Beräkna provision på total affär
+- Se månadsvis kostnadsutveckling och årsöversikt
 
 ## Tips
 

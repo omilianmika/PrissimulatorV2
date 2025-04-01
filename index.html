@@ -9,7 +9,10 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="mb-4">Pris Simulator</h1>
+        <div class="d-flex align-items-center mb-4">
+            <h1 class="mb-0">Pris Simulator</h1>
+            <button id="resetButton" class="btn btn-outline-primary btn-reset">Nollställ</button>
+        </div>
         
         <div class="row">
             <div class="col-md-6">
@@ -20,19 +23,19 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="antalHeltid" class="form-label">Antal heltid (66 kr/st)</label>
-                            <input type="number" class="form-control input-blue" id="antalHeltid" value="300">
+                            <input type="number" class="form-control" id="antalHeltid" value="0">
                         </div>
                         <div class="mb-3">
                             <label for="antalDeltid" class="form-label">Antal deltid (16,50 kr/st)</label>
-                            <input type="number" class="form-control input-blue" id="antalDeltid" value="300">
+                            <input type="number" class="form-control" id="antalDeltid" value="0">
                         </div>
                         <div class="mb-3">
                             <label for="antalSasongare" class="form-label">Antal säsongare (66 kr/st)</label>
-                            <input type="number" class="form-control input-blue" id="antalSasongare" value="3030">
+                            <input type="number" class="form-control" id="antalSasongare" value="0">
                         </div>
                         <div class="mb-3">
                             <label for="sasongManader" class="form-label">Antal månader säsongare</label>
-                            <input type="number" class="form-control input-blue" id="sasongManader" value="4" min="1" max="12">
+                            <input type="number" class="form-control" id="sasongManader" value="0" min="0" max="12">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Välj månader</label>
@@ -60,13 +63,19 @@
                     </div>
                     <div class="card-body">
                         <div class="form-check">
+                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartIngen" value="0" checked>
+                            <label class="form-check-label" for="uppstartIngen">
+                                Ingen uppstartsavgift (0 kr)
+                            </label>
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartLiten" value="5000">
                             <label class="form-check-label" for="uppstartLiten">
                                 Liten (5 000 kr)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartMedel" value="10000" checked>
+                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartMedel" value="10000">
                             <label class="form-check-label" for="uppstartMedel">
                                 Mellan (10 000 kr)
                             </label>
@@ -81,7 +90,7 @@
                         <div class="mb-3">
                             <label for="konsultTimmar" class="form-label">Konsulttimmar</label>
                             <select class="form-select" id="konsultTimmar">
-                                <option value="0">0 timmar</option>
+                                <option value="0" selected>0 timmar</option>
                                 <option value="1000">1 timme (1 000 kr)</option>
                                 <option value="9000">10 timmar (9 000 kr)</option>
                                 <option value="20000">25 timmar (20 000 kr)</option>
@@ -100,7 +109,7 @@
                     <div class="card-body">
                         <p>Licenskostnad per månad: <span id="licensKostnadManad">0</span> kr</p>
                         <p>Licenskostnad per år: <span id="licensKostnadAr">0</span> kr</p>
-                        <p>Uppstartsavgift: <span id="uppstartsavgift">10000</span> kr</p>
+                        <p>Uppstartsavgift: <span id="uppstartsavgift">0</span> kr</p>
                         <p>Konsulttimmar: <span id="konsultTimmarKostnad">0</span> kr</p>
                         <hr>
                         <p>Snittkostnad per användare: <span id="snittkostnadAnvandare">0</span> kr</p>
@@ -131,10 +140,24 @@
                                         <th>Mar</th>
                                         <th>Apr</th>
                                         <th>Maj</th>
+                                        <th>Jun</th>
+                                        <th>Jul</th>
+                                        <th>Aug</th>
+                                        <th>Sep</th>
+                                        <th>Okt</th>
+                                        <th>Nov</th>
+                                        <th>Dec</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr id="monthlyDataRow">
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
