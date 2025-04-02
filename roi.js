@@ -293,27 +293,34 @@ function calculateStorySection(category) {
     let timeSaved = 0;
     let costSaved = 0;
     
-    switch(category) {
-        case 'onboarding':
-            totalTime = data.time * data.people;
-            totalCost = totalTime * data.cost;
-            break;
-        case 'training':
+    // Beräkna baserat på kategori
+    if (category.includes('onboarding')) {
+        totalTime = data.time * data.people;
+        totalCost = totalTime * data.cost;
+    } else if (category.includes('training')) {
+        if (category.includes('manager')) {
             totalTime = data.time * data.sessions;
-            totalCost = totalTime * data.cost;
-            break;
-        case 'communication':
+        } else {
+            totalTime = data.time * data.people;
+        }
+        totalCost = totalTime * data.cost;
+    } else if (category.includes('communication')) {
+        if (category.includes('manager')) {
             totalTime = data.time * data.weeks;
-            totalCost = totalTime * data.cost;
-            break;
-        case 'documents':
+        } else {
+            totalTime = data.time * data.people * 52; // Antar 52 veckor per år
+        }
+        totalCost = totalTime * data.cost;
+    } else if (category.includes('documents')) {
+        if (category.includes('manager')) {
             totalTime = data.time * data.weeks;
-            totalCost = totalTime * data.cost;
-            break;
-        case 'checklists':
-            totalTime = data.time * data.count;
-            totalCost = totalTime * data.cost;
-            break;
+        } else {
+            totalTime = data.time * data.people * 52; // Antar 52 veckor per år
+        }
+        totalCost = totalTime * data.cost;
+    } else if (category.includes('checklists')) {
+        totalTime = data.time * data.count;
+        totalCost = totalTime * data.cost;
     }
     
     timeSaved = totalTime * (data.savings / 100);
@@ -336,25 +343,71 @@ function calculateStorySection(category) {
 
 // Funktion för att uppdatera total besparing
 function updateTotalSavings() {
-    const categories = ['onboarding', 'training', 'communication', 'documents', 'checklists'];
-    let totalTimeSaved = 0;
-    let totalCostSaved = 0;
-    let totalSavingsPercent = 0;
-    let validCategories = 0;
+    const managerCategories = [
+        'onboarding-manager',
+        'training-manager',
+        'communication-manager',
+        'documents-manager',
+        'checklists-manager'
+    ];
     
-    categories.forEach(category => {
+    const employeeCategories = [
+        'onboarding-employee',
+        'training-employee',
+        'communication-employee',
+        'documents-employee',
+        'checklists-employee'
+    ];
+    
+    let managerTotalTimeSaved = 0;
+    let managerTotalCostSaved = 0;
+    let managerTotalSavingsPercent = 0;
+    let validManagerCategories = 0;
+    
+    let employeeTotalTimeSaved = 0;
+    let employeeTotalCostSaved = 0;
+    let employeeTotalSavingsPercent = 0;
+    let validEmployeeCategories = 0;
+    
+    // Beräkna för chefer
+    managerCategories.forEach(category => {
         const result = calculateStorySection(category);
         if (result.totalTime > 0) {
-            totalTimeSaved += result.timeSaved;
-            totalCostSaved += result.costSaved;
-            totalSavingsPercent += result.savings;
-            validCategories++;
+            managerTotalTimeSaved += result.timeSaved;
+            managerTotalCostSaved += result.costSaved;
+            managerTotalSavingsPercent += result.savings;
+            validManagerCategories++;
         }
     });
     
-    const averageSavings = validCategories > 0 ? totalSavingsPercent / validCategories : 0;
+    // Beräkna för medarbetare
+    employeeCategories.forEach(category => {
+        const result = calculateStorySection(category);
+        if (result.totalTime > 0) {
+            employeeTotalTimeSaved += result.timeSaved;
+            employeeTotalCostSaved += result.costSaved;
+            employeeTotalSavingsPercent += result.savings;
+            validEmployeeCategories++;
+        }
+    });
+    
+    // Beräkna genomsnitt och totaler
+    const totalTimeSaved = managerTotalTimeSaved + employeeTotalTimeSaved;
+    const totalCostSaved = managerTotalCostSaved + employeeTotalCostSaved;
+    const validCategories = validManagerCategories + validEmployeeCategories;
+    const averageSavings = validCategories > 0 ? 
+        (managerTotalSavingsPercent + employeeTotalSavingsPercent) / validCategories : 0;
     const paybackTime = systemCost > 0 ? (systemCost / totalCostSaved * 12) : 0;
     
+    // Uppdatera för chefer
+    document.querySelector('.story-manager-total-time-saved').textContent = managerTotalTimeSaved.toFixed(1);
+    document.querySelector('.story-manager-total-cost-saved').textContent = formatCurrency(managerTotalCostSaved);
+    
+    // Uppdatera för medarbetare
+    document.querySelector('.story-employee-total-time-saved').textContent = employeeTotalTimeSaved.toFixed(1);
+    document.querySelector('.story-employee-total-cost-saved').textContent = formatCurrency(employeeTotalCostSaved);
+    
+    // Uppdatera totaler
     document.querySelector('.story-total-time-saved').textContent = totalTimeSaved.toFixed(1);
     document.querySelector('.story-total-cost-saved').textContent = formatCurrency(totalCostSaved);
     document.querySelector('.story-average-time-saved').textContent = averageSavings.toFixed(1);

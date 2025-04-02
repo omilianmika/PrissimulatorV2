@@ -279,29 +279,62 @@
                 <!-- Onboarding -->
                 <div class="story-section mb-4">
                     <h6 class="story-title">Onboarding av nya medarbetare</h6>
-                    <p>När ni anställer nya medarbetare – är det chefen som onboardar dem?</p>
-                    <div class="story-inputs bg-light p-3 rounded">
-                        <div class="mb-2">
-                            <label>Hur många timmar lägger chefen på introduktion?</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="onboarding" data-field="time" placeholder="timmar">
+                    <div class="row">
+                        <!-- Chef -->
+                        <div class="col-md-6">
+                            <p>När ni anställer nya medarbetare – är det chefen som onboardar dem?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Hur många timmar lägger chefen på introduktion?</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-manager" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Vad ligger snittkostnaden för chefen på?</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-manager" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Hur många nyanställda har ni per år?</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-manager" data-field="people" placeholder="personer">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-manager" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="onboarding-manager-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="onboarding-manager-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="onboarding-manager-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="onboarding-manager-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label>Vad ligger snittkostnaden för chefen på?</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="onboarding" data-field="cost" placeholder="kr/timme">
-                        </div>
-                        <div class="mb-2">
-                            <label>Hur många nyanställda har ni per år?</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="onboarding" data-field="people" placeholder="personer">
-                        </div>
-                        <div class="mb-2">
-                            <label>Möjlig tidsbesparing med systemstöd:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="onboarding" data-field="savings" placeholder="%" min="0" max="100">
-                        </div>
-                        <div class="summary-box mt-3">
-                            <p class="mb-1">Total tid per år: <span class="onboarding-total-time">0</span> timmar</p>
-                            <p class="mb-1">Total kostnad per år: <span class="onboarding-total-cost">0 kr</span></p>
-                            <p class="mb-1">Möjlig tidsbesparing: <span class="onboarding-time-saved">0</span> timmar</p>
-                            <p class="mb-0">Möjlig kostnadsbesparing: <span class="onboarding-cost-saved">0 kr</span></p>
+                        <!-- Medarbetare -->
+                        <div class="col-md-6">
+                            <p>Hur lång tid tar det innan en ny medarbetare är självgående?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per person:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-employee" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Snittkostnad för medarbetare:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-employee" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal onboardingar per år:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-employee" data-field="people" placeholder="personer">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="onboarding-employee" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="onboarding-employee-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="onboarding-employee-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="onboarding-employee-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="onboarding-employee-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -309,29 +342,62 @@
                 <!-- Utbildning -->
                 <div class="story-section mb-4">
                     <h6 class="story-title">Interna utbildningar</h6>
-                    <p>Håller chefer interna utbildningar idag?</p>
-                    <div class="story-inputs bg-light p-3 rounded">
-                        <div class="mb-2">
-                            <label>Hur många timmar tar det per utbildning?</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="training" data-field="time" placeholder="timmar">
+                    <div class="row">
+                        <!-- Chef -->
+                        <div class="col-md-6">
+                            <p>Håller chefer interna utbildningar idag?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Hur många timmar tar det per utbildning?</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-manager" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Hur många utbildningar hålls per år?</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-manager" data-field="sessions" placeholder="gånger">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad för chef:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-manager" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-manager" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="training-manager-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="training-manager-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="training-manager-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="training-manager-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label>Hur många utbildningar hålls per år?</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="training" data-field="sessions" placeholder="gånger">
-                        </div>
-                        <div class="mb-2">
-                            <label>Timkostnad för chef:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="training" data-field="cost" placeholder="kr/timme">
-                        </div>
-                        <div class="mb-2">
-                            <label>Möjlig tidsbesparing med systemstöd:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="training" data-field="savings" placeholder="%" min="0" max="100">
-                        </div>
-                        <div class="summary-box mt-3">
-                            <p class="mb-1">Total tid per år: <span class="training-total-time">0</span> timmar</p>
-                            <p class="mb-1">Total kostnad per år: <span class="training-total-cost">0 kr</span></p>
-                            <p class="mb-1">Möjlig tidsbesparing: <span class="training-time-saved">0</span> timmar</p>
-                            <p class="mb-0">Möjlig kostnadsbesparing: <span class="training-cost-saved">0 kr</span></p>
+                        <!-- Medarbetare -->
+                        <div class="col-md-6">
+                            <p>Hur lång tid tar utbildningen för deltagande medarbetare?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per person:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-employee" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal deltagare per år:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-employee" data-field="people" placeholder="personer">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad för medarbetare:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-employee" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="training-employee" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="training-employee-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="training-employee-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="training-employee-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="training-employee-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -339,29 +405,62 @@
                 <!-- Kommunikation -->
                 <div class="story-section mb-4">
                     <h6 class="story-title">Kommunikation och informationsdelning</h6>
-                    <p>Hur mycket tid lägger chefer på att kommunicera viktig info?</p>
-                    <div class="story-inputs bg-light p-3 rounded">
-                        <div class="mb-2">
-                            <label>Tid per vecka:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="communication" data-field="time" placeholder="timmar">
+                    <div class="row">
+                        <!-- Chef -->
+                        <div class="col-md-6">
+                            <p>Hur mycket tid lägger chefer på att kommunicera viktig info?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per vecka:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-manager" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal veckor per år:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-manager" data-field="weeks" placeholder="veckor">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad för chef:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-manager" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-manager" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="communication-manager-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="communication-manager-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="communication-manager-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="communication-manager-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label>Antal veckor per år:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="communication" data-field="weeks" placeholder="veckor">
-                        </div>
-                        <div class="mb-2">
-                            <label>Timkostnad för chef:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="communication" data-field="cost" placeholder="kr/timme">
-                        </div>
-                        <div class="mb-2">
-                            <label>Möjlig tidsbesparing med systemstöd:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="communication" data-field="savings" placeholder="%" min="0" max="100">
-                        </div>
-                        <div class="summary-box mt-3">
-                            <p class="mb-1">Total tid per år: <span class="communication-total-time">0</span> timmar</p>
-                            <p class="mb-1">Total kostnad per år: <span class="communication-total-cost">0 kr</span></p>
-                            <p class="mb-1">Möjlig tidsbesparing: <span class="communication-time-saved">0</span> timmar</p>
-                            <p class="mb-0">Möjlig kostnadsbesparing: <span class="communication-cost-saved">0 kr</span></p>
+                        <!-- Medarbetare -->
+                        <div class="col-md-6">
+                            <p>Hur mycket tid lägger medarbetare på att hitta rätt information?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per vecka:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-employee" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal personer:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-employee" data-field="people" placeholder="personer">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad för medarbetare:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-employee" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="communication-employee" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="communication-employee-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="communication-employee-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="communication-employee-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="communication-employee-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -369,29 +468,62 @@
                 <!-- Dokumenthantering -->
                 <div class="story-section mb-4">
                     <h6 class="story-title">Dokumenthantering</h6>
-                    <p>Hur mycket tid lägger chefer på dokumenthantering varje vecka?</p>
-                    <div class="story-inputs bg-light p-3 rounded">
-                        <div class="mb-2">
-                            <label>Tid per vecka:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="documents" data-field="time" placeholder="timmar">
+                    <div class="row">
+                        <!-- Chef -->
+                        <div class="col-md-6">
+                            <p>Hur mycket tid lägger chefer på dokumenthantering varje vecka?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per vecka:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-manager" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal veckor:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-manager" data-field="weeks" placeholder="veckor">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-manager" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-manager" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="documents-manager-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="documents-manager-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="documents-manager-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="documents-manager-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label>Antal veckor:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="documents" data-field="weeks" placeholder="veckor">
-                        </div>
-                        <div class="mb-2">
-                            <label>Timkostnad:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="documents" data-field="cost" placeholder="kr/timme">
-                        </div>
-                        <div class="mb-2">
-                            <label>Möjlig tidsbesparing med systemstöd:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="documents" data-field="savings" placeholder="%" min="0" max="100">
-                        </div>
-                        <div class="summary-box mt-3">
-                            <p class="mb-1">Total tid per år: <span class="documents-total-time">0</span> timmar</p>
-                            <p class="mb-1">Total kostnad per år: <span class="documents-total-cost">0 kr</span></p>
-                            <p class="mb-1">Möjlig tidsbesparing: <span class="documents-time-saved">0</span> timmar</p>
-                            <p class="mb-0">Möjlig kostnadsbesparing: <span class="documents-cost-saved">0 kr</span></p>
+                        <!-- Medarbetare -->
+                        <div class="col-md-6">
+                            <p>Hur mycket tid lägger medarbetare på att hitta dokument?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per vecka:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-employee" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal medarbetare:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-employee" data-field="people" placeholder="personer">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-employee" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="documents-employee" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="documents-employee-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="documents-employee-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="documents-employee-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="documents-employee-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -399,29 +531,62 @@
                 <!-- Checklistor -->
                 <div class="story-section mb-4">
                     <h6 class="story-title">Checklistor</h6>
-                    <p>Hur mycket tid tar det för chefer att skapa och följa upp checklistor?</p>
-                    <div class="story-inputs bg-light p-3 rounded">
-                        <div class="mb-2">
-                            <label>Tid per checklista:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="checklists" data-field="time" placeholder="timmar">
+                    <div class="row">
+                        <!-- Chef -->
+                        <div class="col-md-6">
+                            <p>Hur mycket tid tar det för chefer att skapa och följa upp checklistor?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per checklista:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-manager" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal checklistor per år:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-manager" data-field="count" placeholder="gånger">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-manager" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-manager" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="checklists-manager-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="checklists-manager-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="checklists-manager-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="checklists-manager-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label>Antal checklistor per år:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="checklists" data-field="count" placeholder="gånger">
-                        </div>
-                        <div class="mb-2">
-                            <label>Timkostnad:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="checklists" data-field="cost" placeholder="kr/timme">
-                        </div>
-                        <div class="mb-2">
-                            <label>Möjlig tidsbesparing med systemstöd:</label>
-                            <input type="number" class="form-control form-control-sm story-input" data-category="checklists" data-field="savings" placeholder="%" min="0" max="100">
-                        </div>
-                        <div class="summary-box mt-3">
-                            <p class="mb-1">Total tid per år: <span class="checklists-total-time">0</span> timmar</p>
-                            <p class="mb-1">Total kostnad per år: <span class="checklists-total-cost">0 kr</span></p>
-                            <p class="mb-1">Möjlig tidsbesparing: <span class="checklists-time-saved">0</span> timmar</p>
-                            <p class="mb-0">Möjlig kostnadsbesparing: <span class="checklists-cost-saved">0 kr</span></p>
+                        <!-- Medarbetare -->
+                        <div class="col-md-6">
+                            <p>Hur lång tid tar det för medarbetare att följa checklistor eller rapportera?</p>
+                            <div class="story-inputs bg-light p-3 rounded">
+                                <div class="mb-2">
+                                    <label>Tid per uppgift:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-employee" data-field="time" placeholder="timmar">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Antal uppgifter per år:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-employee" data-field="count" placeholder="gånger">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Timkostnad:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-employee" data-field="cost" placeholder="kr/timme">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Möjlig tidsbesparing med systemstöd:</label>
+                                    <input type="number" class="form-control form-control-sm story-input" data-category="checklists-employee" data-field="savings" placeholder="%" min="0" max="100">
+                                </div>
+                                <div class="summary-box mt-3">
+                                    <p class="mb-1">Total tid per år: <span class="checklists-employee-total-time">0</span> timmar</p>
+                                    <p class="mb-1">Total kostnad per år: <span class="checklists-employee-total-cost">0 kr</span></p>
+                                    <p class="mb-1">Möjlig tidsbesparing: <span class="checklists-employee-time-saved">0</span> timmar</p>
+                                    <p class="mb-0">Möjlig kostnadsbesparing: <span class="checklists-employee-cost-saved">0 kr</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -429,6 +594,19 @@
                 <!-- Total besparing -->
                 <div class="story-section total-savings bg-primary text-white p-3 rounded">
                     <h6 class="story-title">Total möjlig besparing</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">För chefer:</h6>
+                            <p class="mb-1">Total tid som kan sparas: <span class="story-manager-total-time-saved">0</span> timmar per år</p>
+                            <p class="mb-0">Total kostnad som kan sparas: <span class="story-manager-total-cost-saved">0 kr</span> per år</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">För medarbetare:</h6>
+                            <p class="mb-1">Total tid som kan sparas: <span class="story-employee-total-time-saved">0</span> timmar per år</p>
+                            <p class="mb-0">Total kostnad som kan sparas: <span class="story-employee-total-cost-saved">0 kr</span> per år</p>
+                        </div>
+                    </div>
+                    <hr class="border-white">
                     <div class="row">
                         <div class="col-md-6">
                             <p class="mb-1">Total tid som kan sparas: <span class="story-total-time-saved">0</span> timmar per år</p>
