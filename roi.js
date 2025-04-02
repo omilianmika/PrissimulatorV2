@@ -277,4 +277,94 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
 });
 
 // Kör initial beräkning
-updateTotals(); 
+updateTotals();
+
+// Funktion för att beräkna berättelseflödet
+function calculateStorySection(category) {
+    const inputs = document.querySelectorAll(`[data-category="${category}"]`);
+    let data = {};
+    
+    inputs.forEach(input => {
+        data[input.dataset.field] = parseFloat(input.value) || 0;
+    });
+    
+    let totalTime = 0;
+    let totalCost = 0;
+    let timeSaved = 0;
+    let costSaved = 0;
+    
+    switch(category) {
+        case 'onboarding':
+            totalTime = data.time * data.people;
+            totalCost = totalTime * data.cost;
+            break;
+        case 'training':
+            totalTime = data.time * data.sessions;
+            totalCost = totalTime * data.cost;
+            break;
+        case 'communication':
+            totalTime = data.time * data.weeks;
+            totalCost = totalTime * data.cost;
+            break;
+        case 'documents':
+            totalTime = data.time * data.weeks;
+            totalCost = totalTime * data.cost;
+            break;
+        case 'checklists':
+            totalTime = data.time * data.count;
+            totalCost = totalTime * data.cost;
+            break;
+    }
+    
+    timeSaved = totalTime * (data.savings / 100);
+    costSaved = timeSaved * data.cost;
+    
+    // Uppdatera summering för sektionen
+    document.querySelector(`.${category}-total-time`).textContent = totalTime.toFixed(1);
+    document.querySelector(`.${category}-total-cost`).textContent = formatCurrency(totalCost);
+    document.querySelector(`.${category}-time-saved`).textContent = timeSaved.toFixed(1);
+    document.querySelector(`.${category}-cost-saved`).textContent = formatCurrency(costSaved);
+    
+    return {
+        totalTime,
+        totalCost,
+        timeSaved,
+        costSaved,
+        savings: data.savings
+    };
+}
+
+// Funktion för att uppdatera total besparing
+function updateTotalSavings() {
+    const categories = ['onboarding', 'training', 'communication', 'documents', 'checklists'];
+    let totalTimeSaved = 0;
+    let totalCostSaved = 0;
+    let totalSavingsPercent = 0;
+    let validCategories = 0;
+    
+    categories.forEach(category => {
+        const result = calculateStorySection(category);
+        if (result.totalTime > 0) {
+            totalTimeSaved += result.timeSaved;
+            totalCostSaved += result.costSaved;
+            totalSavingsPercent += result.savings;
+            validCategories++;
+        }
+    });
+    
+    const averageSavings = validCategories > 0 ? totalSavingsPercent / validCategories : 0;
+    const paybackTime = systemCost > 0 ? (systemCost / totalCostSaved * 12) : 0;
+    
+    document.querySelector('.story-total-time-saved').textContent = totalTimeSaved.toFixed(1);
+    document.querySelector('.story-total-cost-saved').textContent = formatCurrency(totalCostSaved);
+    document.querySelector('.story-average-time-saved').textContent = averageSavings.toFixed(1);
+    document.querySelector('.story-payback-time').textContent = paybackTime.toFixed(1);
+}
+
+// Lägg till event listeners för berättelseflödet
+document.querySelectorAll('.story-input').forEach(input => {
+    input.addEventListener('input', updateTotalSavings);
+});
+
+// Kör initial beräkning för berättelseflödet
+updateTotalSavings(); 

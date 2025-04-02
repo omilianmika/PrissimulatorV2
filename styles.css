@@ -158,4 +158,28 @@ option {
 .price-table .table th:first-child,
 .price-table .table td:first-child {
     text-align: left;
+}
+
+.story-section {
+    border-left: 4px solid #F0B600;
+    padding-left: 15px;
+}
+
+.story-title {
+    color: #4B5D60;
+    font-weight: 600;
+}
+
+.story-inputs {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.summary-box {
+    background-color: rgba(75, 93, 96, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.total-savings {
+    background-color: #4B5D60 !important;
 } 
