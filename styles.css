@@ -127,6 +127,8 @@ option {
     color: #4B5D60;
     cursor: pointer;
     font-size: 1.1rem;
+    margin-left: 0.5rem;
+    display: inline-block;
 }
 
 .bi-info-circle:hover {
