@@ -42,8 +42,13 @@ function updateTotals() {
         moneySaved: []
     };
 
+    // Samla data för sammanfattning
+    const summaryData = [];
+
     // Gå igenom alla rader och summera
     document.querySelectorAll('tbody tr').forEach(row => {
+        const category = row.querySelector('td:nth-child(1)').textContent;
+        const forWhom = row.querySelector('td:nth-child(2)').textContent;
         const timePerPerson = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
         const hourlyRate = parseFloat(row.querySelector('td:nth-child(5) input').value) || 0;
         const numberOfPeople = parseFloat(row.querySelector('td:nth-child(6) input').value) || 0;
@@ -51,6 +56,14 @@ function updateTotals() {
         
         const roi = calculateRowROI(timePerPerson, hourlyRate, numberOfPeople, timeSavingsPercent);
         
+        // Spara data för sammanfattning
+        summaryData.push({
+            category,
+            forWhom,
+            timeSaved: roi.timeSaved,
+            moneySaved: roi.moneySaved
+        });
+
         // Uppdatera beräknade värden i raden
         row.querySelector('td:nth-child(7)').textContent = formatCurrency(roi.totalCost);
         row.querySelector('td:nth-child(8)').textContent = roi.totalTime;
@@ -86,6 +99,22 @@ function updateTotals() {
     // Beräkna och visa ROI
     const roi = systemCost > 0 ? ((totalMoneySaved - systemCost) / systemCost * 100) : Infinity;
     document.getElementById('roiPercentage').textContent = roi === Infinity ? '∞' : roi.toFixed(1);
+
+    // Generera sammanfattningstext
+    let summaryText = `Genom att implementera mikroutbildningar kan ni spara totalt ${formatCurrency(totalMoneySaved)} per år. `;
+    summaryText += `Detta uppnås genom en total tidsbesparing på ${totalTimeSaved} timmar fördelat på följande områden:\n\n`;
+    
+    summaryData.forEach(data => {
+        summaryText += `• ${data.category} för ${data.forWhom.toLowerCase()}: ${data.timeSaved} timmar (${formatCurrency(data.moneySaved)})\n`;
+    });
+
+    if (systemCost > 0) {
+        const paybackMonths = (systemCost / totalMoneySaved * 12).toFixed(1);
+        summaryText += `\nMed en systemkostnad på ${formatCurrency(systemCost)} och en årlig besparing på ${formatCurrency(totalMoneySaved)} `;
+        summaryText += `får ni tillbaka investeringen på ${paybackMonths} månader.`;
+    }
+
+    document.getElementById('savingsSummary').innerHTML = summaryText.replace(/\n/g, '<br>');
 
     // Uppdatera diagram
     updateChart(systemCost, totalMoneySaved);
