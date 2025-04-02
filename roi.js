@@ -33,6 +33,17 @@ function updateTotals() {
     let totalTimeSaved = 0;
     let totalMoneySaved = 0;
     
+    // Separata totaler för chefer och medarbetare
+    let managerTotalCost = 0;
+    let managerTotalTime = 0;
+    let managerTimeSaved = 0;
+    let managerMoneySaved = 0;
+    
+    let employeeTotalCost = 0;
+    let employeeTotalTime = 0;
+    let employeeTimeSaved = 0;
+    let employeeMoneySaved = 0;
+    
     // Data för funktionsområdesdiagram
     const functionData = {
         labels: [],
@@ -43,7 +54,8 @@ function updateTotals() {
     };
 
     // Samla data för sammanfattning
-    const summaryData = [];
+    const managerData = [];
+    const employeeData = [];
 
     // Gå igenom alla rader och summera
     document.querySelectorAll('tbody tr').forEach(row => {
@@ -56,13 +68,30 @@ function updateTotals() {
         
         const roi = calculateRowROI(timePerPerson, hourlyRate, numberOfPeople, timeSavingsPercent);
         
-        // Spara data för sammanfattning
-        summaryData.push({
+        // Spara data för sammanfattning baserat på målgrupp
+        const summaryItem = {
             category,
             forWhom,
+            function: row.querySelector('td:nth-child(3)').textContent,
             timeSaved: roi.timeSaved,
-            moneySaved: roi.moneySaved
-        });
+            moneySaved: roi.moneySaved,
+            totalTime: roi.totalTime,
+            totalCost: roi.totalCost
+        };
+
+        if (forWhom.includes('chef')) {
+            managerData.push(summaryItem);
+            managerTotalCost += roi.totalCost;
+            managerTotalTime += roi.totalTime;
+            managerTimeSaved += roi.timeSaved;
+            managerMoneySaved += roi.moneySaved;
+        } else {
+            employeeData.push(summaryItem);
+            employeeTotalCost += roi.totalCost;
+            employeeTotalTime += roi.totalTime;
+            employeeTimeSaved += roi.timeSaved;
+            employeeMoneySaved += roi.moneySaved;
+        }
 
         // Uppdatera beräknade värden i raden
         row.querySelector('td:nth-child(7)').textContent = formatCurrency(roi.totalCost);
@@ -101,11 +130,29 @@ function updateTotals() {
     document.getElementById('roiPercentage').textContent = roi === Infinity ? '∞' : roi.toFixed(1);
 
     // Generera sammanfattningstext
-    let summaryText = `Genom att implementera mikroutbildningar kan ni spara totalt ${formatCurrency(totalMoneySaved)} per år. `;
-    summaryText += `Detta uppnås genom en total tidsbesparing på ${totalTimeSaved} timmar fördelat på följande områden:\n\n`;
+    let summaryText = `Genom att implementera systemet kan ni spara totalt ${formatCurrency(totalMoneySaved)} per år. `;
+    summaryText += `Detta uppnås genom en total tidsbesparing på ${totalTimeSaved} timmar.\n\n`;
     
-    summaryData.forEach(data => {
-        summaryText += `• ${data.category} för ${data.forWhom.toLowerCase()}: ${data.timeSaved} timmar (${formatCurrency(data.moneySaved)})\n`;
+    // Sammanfattning för chefer
+    summaryText += `För chefer:\n`;
+    summaryText += `Total kostnad: ${formatCurrency(managerTotalCost)}\n`;
+    summaryText += `Total tid: ${managerTotalTime} timmar\n`;
+    summaryText += `Total tidsbesparing: ${managerTimeSaved} timmar\n`;
+    summaryText += `Total kostnadsbesparing: ${formatCurrency(managerMoneySaved)}\n\n`;
+    
+    managerData.forEach(data => {
+        summaryText += `• ${data.category} - ${data.function}: ${data.timeSaved} timmar (${formatCurrency(data.moneySaved)})\n`;
+    });
+
+    // Sammanfattning för medarbetare
+    summaryText += `\nFör medarbetare:\n`;
+    summaryText += `Total kostnad: ${formatCurrency(employeeTotalCost)}\n`;
+    summaryText += `Total tid: ${employeeTotalTime} timmar\n`;
+    summaryText += `Total tidsbesparing: ${employeeTimeSaved} timmar\n`;
+    summaryText += `Total kostnadsbesparing: ${formatCurrency(employeeMoneySaved)}\n\n`;
+    
+    employeeData.forEach(data => {
+        summaryText += `• ${data.category} - ${data.function}: ${data.timeSaved} timmar (${formatCurrency(data.moneySaved)})\n`;
     });
 
     if (systemCost > 0) {
