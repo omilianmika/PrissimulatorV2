@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priskalkylator V3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .price-table th, .price-table td {
+            text-align: right;
+            padding: 8px;
+        }
+        .price-table th:first-child, .price-table td:first-child {
+            text-align: left;
+        }
+        .highlight {
+            background-color: #e9ecef;
+        }
+        .red-text {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Priskalkylator V3</h2>
+        
+        <!-- Prismatris -->
+        <div class="table-responsive mb-4">
+            <table class="table table-bordered price-table">
+                <thead>
+                    <tr>
+                        <th>Nivå</th>
+                        <th>Pris</th>
+                        <th>Månad</th>
+                        <th>År</th>
+                        <th class="red-text">Uppstart</th>
+                        <th>Totalt</th>
+                        <th class="red-text">Maximal rabatt (år 1)</th>
+                        <th>År 1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10</td>
+                        <td>75</td>
+                        <td>750</td>
+                        <td>9 000</td>
+                        <td class="red-text">10 000</td>
+                        <td>19 000</td>
+                        <td class="red-text">10%</td>
+                        <td>1 900</td>
+                    </tr>
+                    <!-- Resten av raderna läggs till dynamiskt via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Kalkylator -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Anpassa priser</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Antal användare</label>
+                            <select class="form-select" id="userCount">
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="75">75</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="400">400</option>
+                                <option value="600">600</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Uppstartsavgift</label>
+                            <input type="range" class="form-range" id="startupFee" min="0" max="25000" step="1000">
+                            <div class="d-flex justify-content-between">
+                                <span>0 kr</span>
+                                <span id="startupFeeValue">10 000 kr</span>
+                                <span>25 000 kr</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Rabatt</label>
+                            <input type="range" class="form-range" id="discount" min="0" max="20" step="1">
+                            <div class="d-flex justify-content-between">
+                                <span>0%</span>
+                                <span id="discountValue">10%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Antal konsulttimmar</label>
+                            <input type="number" class="form-control" id="consultingHours" value="0" min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Timpris konsult</label>
+                            <input type="number" class="form-control" id="consultingRate" value="1200" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Sammanställning</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6>Licensavgifter</h6>
+                            <p class="mb-1">Månadskostnad: <span id="monthlyFee">0 kr</span></p>
+                            <p class="mb-1">Årskostnad: <span id="yearlyFee">0 kr</span></p>
+                            <p class="mb-1">Uppstartsavgift: <span id="startupFeeSummary">0 kr</span></p>
+                            <p class="mb-1">Konsultkostnad: <span id="consultingFee">0 kr</span></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Kostnader per användare</h6>
+                            <p class="mb-1">Före rabatt (per månad): <span id="costPerUserBefore">0 kr</span></p>
+                            <p class="mb-1">Efter rabatt (per månad): <span id="costPerUserAfter">0 kr</span></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Rabatt</h6>
+                            <p class="mb-1">Rabatt per månad: <span id="monthlyDiscount">0 kr</span></p>
+                            <p class="mb-1">Rabatt per år: <span id="yearlyDiscount">0 kr</span></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Totalt</h6>
+                            <p class="mb-1">Totalt första året: <span id="totalFirstYear">0 kr</span></p>
+                            <p class="mb-1">Totalt följande år: <span id="totalFollowingYears">0 kr</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="prislista-v3.js"></script>
+</body>
+</html> 
